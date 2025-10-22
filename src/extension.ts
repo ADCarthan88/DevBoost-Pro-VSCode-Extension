@@ -5,6 +5,10 @@ import { SnippetManager } from './commands/snippetManager';
 import { ProductivityDashboard } from './webview/dashboard';
 import { CompletionProvider } from './providers/completionProvider';
 import { AdvancedSecurity, SecureSession } from './utils/advancedSecurity';
+import { RealAIAnalyzer } from './ai/realAIAnalyzer';
+import { TeamCollaboration } from './collaboration/teamCollaboration';
+import { MLAnalytics } from './analytics/mlAnalytics';
+import { GamificationSystem } from './gamification/gamificationSystem';
 
 export function activate(context: vscode.ExtensionContext) {
     console.log('DevBoost Pro is now active!');
@@ -21,6 +25,12 @@ export function activate(context: vscode.ExtensionContext) {
     const timeTracker = new TimeTracker(context);
     const snippetManager = new SnippetManager();
     const dashboard = new ProductivityDashboard(context);
+    
+    // Initialize advanced features
+    const aiAnalyzer = new RealAIAnalyzer();
+    const teamCollab = new TeamCollaboration(context);
+    const mlAnalytics = new MLAnalytics(context);
+    const gamification = new GamificationSystem(context);
 
     // Register commands
     const commands = [
@@ -69,6 +79,27 @@ export function activate(context: vscode.ExtensionContext) {
             if (editor) {
                 codeAnalyzer.optimizeImports(editor);
             }
+        }),
+
+        vscode.commands.registerCommand('devboost.showAchievements', () => {
+            gamification.showAchievementsPanel();
+        }),
+
+        vscode.commands.registerCommand('devboost.joinTeam', async () => {
+            const teamCode = await vscode.window.showInputBox({
+                prompt: 'Enter team code to join',
+                placeHolder: 'team-code-123'
+            });
+            if (teamCode) {
+                const success = await teamCollab.joinTeam(teamCode);
+                if (success) {
+                    gamification.addXP(100, 'Joined team');
+                }
+            }
+        }),
+
+        vscode.commands.registerCommand('devboost.showLeaderboard', () => {
+            gamification.showLeaderboard();
         })
     ];
 

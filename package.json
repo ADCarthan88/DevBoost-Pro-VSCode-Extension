@@ -1,0 +1,296 @@
+{
+  "name": "devboost-pro",
+  "displayName": "DevBoost Pro",
+  "description": "AI-powered productivity extension for developers with smart code analysis, time tracking, and workflow automation",
+  "version": "1.0.0",
+  "publisher": "ADCarthan88",
+  "author": {
+    "name": "Adam Carthan",
+    "email": "adcarthan88@gmail.com",
+    "url": "https://github.com/ADCarthan88"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/ADCarthan88/DevBoost-Pro-VSCode-Extension",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ADCarthan88/DevBoost-Pro-VSCode-Extension.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ADCarthan88/DevBoost-Pro-VSCode-Extension/issues"
+  },
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other",
+    "Snippets", 
+    "Formatters",
+    "Linters",
+    "Machine Learning",
+    "Analytics"
+  ],
+  "keywords": [
+    "productivity",
+    "ai",
+    "code-analysis", 
+    "time-tracking",
+    "automation",
+    "dashboard",
+    "security",
+    "snippets",
+    "completion",
+    "analytics"
+  ],
+  "galleryBanner": {
+    "color": "#1e1e1e",
+    "theme": "dark"
+  },
+  "icon": "media/icon.png",
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "devboost.analyzeCode",
+        "title": "Analyze Code Quality",
+        "category": "DevBoost",
+        "icon": "$(search)"
+      },
+      {
+        "command": "devboost.showDashboard", 
+        "title": "Show Productivity Dashboard",
+        "category": "DevBoost",
+        "icon": "$(dashboard)"
+      },
+      {
+        "command": "devboost.startTimeTracking",
+        "title": "Toggle Time Tracking",
+        "category": "DevBoost",
+        "icon": "$(watch)"
+      },
+      {
+        "command": "devboost.generateSnippet",
+        "title": "Generate Smart Snippet",
+        "category": "DevBoost",
+        "icon": "$(code)"
+      },
+      {
+        "command": "devboost.optimizeImports",
+        "title": "Optimize Imports",
+        "category": "DevBoost",
+        "icon": "$(symbol-namespace)"
+      },
+      {
+        "command": "devboost.toggleTimeTracking",
+        "title": "Toggle Time Tracking",
+        "category": "DevBoost"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "devboost.analyzeCode",
+        "key": "ctrl+shift+a",
+        "mac": "cmd+shift+a",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "devboost.showDashboard",
+        "key": "ctrl+shift+d",
+        "mac": "cmd+shift+d"
+      },
+      {
+        "command": "devboost.startTimeTracking",
+        "key": "ctrl+shift+t",
+        "mac": "cmd+shift+t"
+      },
+      {
+        "command": "devboost.generateSnippet",
+        "key": "ctrl+shift+s",
+        "mac": "cmd+shift+s",
+        "when": "editorHasSelection"
+      },
+      {
+        "command": "devboost.optimizeImports",
+        "key": "ctrl+shift+o",
+        "mac": "cmd+shift+o",
+        "when": "editorTextFocus"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "devboost.analyzeCode",
+          "group": "devboost@1",
+          "when": "editorTextFocus"
+        },
+        {
+          "command": "devboost.generateSnippet",
+          "group": "devboost@2", 
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "devboost.optimizeImports",
+          "group": "devboost@3",
+          "when": "resourceExtname =~ /\\.(js|ts|jsx|tsx)$/"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "devboost.analyzeCode",
+          "group": "navigation@1",
+          "when": "editorTextFocus"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "devboost.showDashboard",
+          "group": "navigation@1"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "DevBoost Pro",
+      "properties": {
+        "devboost.enableAI": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable AI-powered code analysis and suggestions",
+          "scope": "window"
+        },
+        "devboost.trackTime": {
+          "type": "boolean", 
+          "default": true,
+          "description": "Enable automatic time tracking for productivity analytics",
+          "scope": "window"
+        },
+        "devboost.autoAnalyze": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically analyze code when files are saved",
+          "scope": "window"
+        },
+        "devboost.dashboardTheme": {
+          "type": "string",
+          "enum": ["dark", "light", "auto"],
+          "default": "dark",
+          "description": "Theme for the productivity dashboard",
+          "scope": "window"
+        },
+        "devboost.notifications": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show productivity notifications and tips",
+          "scope": "window"
+        },
+        "devboost.securityLevel": {
+          "type": "string",
+          "enum": ["standard", "high", "maximum"],
+          "default": "high",
+          "description": "Security level for data protection and validation",
+          "scope": "window"
+        },
+        "devboost.auditLogging": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable security audit logging",
+          "scope": "window"
+        },
+        "devboost.sessionTimeout": {
+          "type": "number",
+          "default": 1800,
+          "minimum": 300,
+          "maximum": 7200,
+          "description": "Session timeout in seconds",
+          "scope": "window"
+        },
+        "devboost.maxFileSize": {
+          "type": "number",
+          "default": 1048576,
+          "description": "Maximum file size (in bytes) for code analysis",
+          "scope": "window"
+        },
+        "devboost.excludePatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": ["node_modules/**", "dist/**", "build/**", "*.min.js"],
+          "description": "File patterns to exclude from analysis",
+          "scope": "window"
+        }
+      }
+    },
+    "languages": [
+      {
+        "id": "devboost-log",
+        "aliases": ["DevBoost Log"],
+        "extensions": [".devboost"]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "devboost-log",
+        "scopeName": "source.devboost",
+        "path": "./syntaxes/devboost.tmGrammar.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "lint:fix": "eslint src --ext ts --fix",
+    "test": "node ./out/test/runTest.js",
+    "test:unit": "mocha out/test/suite/*.test.js",
+    "test:integration": "node ./out/test/runTest.js --integration",
+    "coverage": "nyc npm run test",
+    "package": "vsce package",
+    "publish": "vsce publish",
+    "clean": "rimraf out",
+    "build": "npm run clean && npm run compile",
+    "dev": "npm run watch",
+    "security-audit": "npm audit --audit-level moderate",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "@types/mocha": "^10.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "mocha": "^10.1.0",
+    "nyc": "^15.1.0",
+    "prettier": "^2.8.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.9.4",
+    "@vscode/test-electron": "^2.2.0",
+    "@vscode/vsce": "^2.15.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "extensionDependencies": [],
+  "badges": [
+    {
+      "url": "https://img.shields.io/badge/PRs-welcome-brightgreen.svg",
+      "href": "https://github.com/ADCarthan88/DevBoost-Pro-VSCode-Extension/pulls",
+      "description": "PRs Welcome"
+    },
+    {
+      "url": "https://img.shields.io/github/license/ADCarthan88/DevBoost-Pro-VSCode-Extension",
+      "href": "https://github.com/ADCarthan88/DevBoost-Pro-VSCode-Extension/blob/main/LICENSE",
+      "description": "License"
+    }
+  ],
+  "qna": "https://github.com/ADCarthan88/DevBoost-Pro-VSCode-Extension/discussions",
+  "sponsor": {
+    "url": "https://github.com/sponsors/ADCarthan88"
+  }
+}
